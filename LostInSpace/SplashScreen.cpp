@@ -1,12 +1,10 @@
 #include "SplashScreen.h"
 
-SplashScreen::SplashScreen(std::string pathToImage, int width, int height, int originalWidth, int originalHeight)
+SplashScreen::SplashScreen(std::string pathToImage, int width, int height)
 {
 	this->pathToImage = pathToImage;
 	this->width = width;
 	this->height = height;
-	this->originalWidth = originalWidth;
-	this->originalHeight = originalHeight;
 }
 
 
@@ -54,10 +52,16 @@ void SplashScreen::update(float deltaTime)
 		}
 		square.setFillColor(sf::Color(0, 0, 0, alpha));
 	}
+
+	if (sf::Keyboard::isKeyPressed(sf::Keyboard::Return) || sf::Keyboard::isKeyPressed(sf::Keyboard::Escape) || sf::Keyboard::isKeyPressed(sf::Keyboard::Space))
+	{
+		newState = sn::MenuState;
+	}
 }
 
 void SplashScreen::draw(sf::RenderWindow & window)
 {
+	window.clear(sf::Color::Black);
 	window.setView(view);
 	window.draw(image);
 	window.draw(square);

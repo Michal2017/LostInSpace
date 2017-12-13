@@ -16,8 +16,6 @@ public:
 protected:
 	int width;
 	int height;
-	int originalWidth;
-	int originalHeight;
 	sn::GameState newState = sn::None;
 	sf::View getLetterboxView(sf::View view, int windowWidth, int windowHeight);
 };

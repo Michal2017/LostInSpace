@@ -25,7 +25,9 @@ void Game::run() //urochomienie gry
 	sf::Clock gameClock;
 	float deltaTime;
 
-	std::unique_ptr<SplashScreen> splashScreen(new SplashScreen("background/made_with_sfml.png", width, height, originalWidth, originalHeight)); //pierwszy stan gry - logo
+	font.loadFromFile("fonts/spartaco.ttf");
+
+	std::unique_ptr<SplashScreen> splashScreen(new SplashScreen("background/made_with_sfml.png", width, height)); //pierwszy stan gry - logo
 
 	activeState = std::move(splashScreen);
 	activeState->loadResources();
@@ -45,6 +47,20 @@ void Game::changeState(sn::GameState newState)
 {
 	if (newState == sn::None); //brak zmiany stanu gry
 	else if (newState == sn::MenuState)
+	{
+		std::unique_ptr<MenuState> menuState(new MenuState("background/menu_background.png", font));
+		activeState = std::move(menuState);
+		activeState->loadResources();
+	}
+	else if (newState == sn::OptionsMenu)
+	{
+		//menu opcji
+	}
+	else if (newState == sn::Instruction)
+	{
+		//instrukcja
+	}
+	else if (newState == sn::Quit)
 	{
 		window.close();
 	}

@@ -1,8 +1,10 @@
 #pragma once
 
-namespace sn
+//zawiera globalne stale, struktury itp. 
+
+namespace sn //sn - state names
 {
-	enum GameState { None, SplashScreen, MenuState, OptionMenu, Instruction, Gameplay, GameOver };
+	enum GameState { None, SplashScreen, MenuState, OptionsMenu, Instruction, Gameplay, GameOver, Quit };
 
 	struct resolution
 	{
@@ -10,3 +12,6 @@ namespace sn
 		int y;
 	};
 }
+
+const int originalWidth = 1920;
+const int originalHeight = 1080; //rozdzielczosc w jakiej byla projektowana gra

@@ -5,8 +5,8 @@
 #include <iostream>
 #include <SFML/Graphics.hpp>
 
-#include "State.h"
 #include "SplashScreen.h"
+#include "MenuState.h"
 
 class Game //Pseudo silnik gry.
 {
@@ -17,10 +17,9 @@ public:
 
 private:
 	sf::RenderWindow window;
+	sf::Font font;
 	int width;
 	int height; //rozdzielczosc okna, pobrana z wczytanego pliku konfiguracyjnego
-	const int originalWidth = 1920;
-	const int originalHeight = 1080; //rozdzielczosc w jakiej byla projektowana gra
 	float fxVolume;
 	float musicVolume;
 	bool isFullScreen;

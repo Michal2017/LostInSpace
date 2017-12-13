@@ -8,7 +8,7 @@
 class SplashScreen : public State //Klasa wyswietlajaca obraz.
 {
 public:
-	SplashScreen(std::string pathToImage, int width, int height, int originalWidth, int originalHeight); //sciezka do obrazu, rozmiary okna, oryginalna - nieskalowana rozdzielczosc
+	SplashScreen(std::string pathToImage, int width, int height); //sciezka do obrazu, rozmiary okna
 	~SplashScreen();
 	void loadResources();
 	void eventHandle(sf::RenderWindow & window);
