@@ -118,7 +118,7 @@ void MenuState::draw(sf::RenderWindow & window)
 	window.draw(menuBackground);
 	for (size_t i = 0; i < buttons.size(); ++i)
 	{
-		buttons[i].draw(window);
+		window.draw(buttons[i].getDrawable());
 	}
 	window.display();
 }

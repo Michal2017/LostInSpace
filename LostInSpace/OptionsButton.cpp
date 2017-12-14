@@ -1,44 +1,35 @@
 #include "OptionsButton.h"
 
-OptionsButton::OptionsButton(std::string text, std::string valueS, sf::Font & font, int size)
-	: MenuButton(text, font, size), value(valueS, font, size)
+OptionsButton::OptionsButton(std::string value, sf::Font & font, int size)
+	: button(value, font, size)
 {
-	value.setFillColor(sf::Color::White);
-	value.setOrigin(0.0f, 0.0f);
-	value.setPosition(sf::Vector2f(0.0f, 0.0f));
-	value.setOutlineColor(sf::Color::Red);
-	value.setOutlineThickness(0.0f);
+	button.setFillColor(sf::Color::White);
+	button.setOrigin(0.0f, 0.0f);
+	button.setPosition(sf::Vector2f(0.0f, 0.0f));
+	button.setOutlineColor(sf::Color::Red);
+	button.setOutlineThickness(0.0f);
 }
 
 OptionsButton::~OptionsButton()
 {
 }
 
-void OptionsButton::setPosition(sf::Vector2f position1, sf::Vector2f position2, bool center) //position1 - pozycja dla klasy bazowej, position2 - pozycja dla value
+void OptionsButton::setPosition(sf::Vector2f position, bool center)
 {
-	MenuButton::setPosition(position1, center);
-	value.setPosition(position2);
+	button.setPosition(position);
 }
 
 void OptionsButton::setActive()
 {
-	MenuButton::setActive();
-	value.setOutlineThickness(10.0f);
+	button.setOutlineThickness(10.0f);
 }
 
 void OptionsButton::setInactive()
 {
-	MenuButton::setInactive();
-	value.setOutlineThickness(0.0f);
+	button.setOutlineThickness(0.0f);
 }
 
-void OptionsButton::update(std::string valueS)
+void OptionsButton::updateValue(std::string newString)
 {
-	value.setString(valueS);
-}
-
-void OptionsButton::draw(sf::RenderWindow & window)
-{
-	MenuButton::draw(window);
-	window.draw(value);
+	button.setString(newString);
 }

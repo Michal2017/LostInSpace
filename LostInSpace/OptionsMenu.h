@@ -28,10 +28,13 @@ private:
 	sf::View view;
 	sf::Font font;
 	std::string pathToImage;
-	std::vector<std::unique_ptr<MenuButton>> buttons; //tablica z przyciskami
+	std::vector<MenuButton> buttons; //tablica z przyciskami
+	std::vector<OptionsButton> values; //tablica z wartosciami konfiguracji
 	short activeButton = 0; //aktywny przycisk, odnosi sie do elementu tablicy buttons
 	bool downKeyIsReleased = true;
 	bool upKeyIsReleased = true;
+	bool rightKeyIsReleased = true;
+	bool leftKeyIsReleased = true;
 	bool returnKeyIsReleased = false;
 	int musicVolume; //stale do wczytania z pliku konfiguracyjnego
 	int fxVolume;

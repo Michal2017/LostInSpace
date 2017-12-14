@@ -23,10 +23,6 @@ void MenuButton::setPosition(sf::Vector2f position, bool center)
 	}
 }
 
-void MenuButton::setPosition(sf::Vector2f position1, sf::Vector2f position2, bool center)
-{
-}
-
 void MenuButton::setActive()
 {
 	button.setOutlineThickness(10.0f);
@@ -35,15 +31,6 @@ void MenuButton::setActive()
 void MenuButton::setInactive()
 {
 	button.setOutlineThickness(0.0f);
-}
-
-void MenuButton::update()
-{
-}
-
-void MenuButton::draw(sf::RenderWindow & window)
-{
-	window.draw(button);
 }
 
 void MenuButton::centerPosition()

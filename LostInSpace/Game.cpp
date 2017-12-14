@@ -58,6 +58,12 @@ void Game::changeState(sn::GameState newState)
 		activeState = std::move(optionsMenu);
 		activeState->loadResources();
 	}
+	else if (newState == sn::ApplyOptions)
+	{
+		std::unique_ptr<ApplyOptions> applyOptions(new ApplyOptions(fxVolume, musicVolume, isFullScreen, width, height));
+		activeState = std::move(applyOptions);
+		activeState->loadResources();
+	}
 	else if (newState == sn::Instruction)
 	{
 		//instrukcja
@@ -65,5 +71,18 @@ void Game::changeState(sn::GameState newState)
 	else if (newState == sn::Quit)
 	{
 		window.close();
+	}
+}
+
+void Game::updateOptions()
+{
+	std::fstream config;
+
+	config.open("config", std::ios::in); //otworz do odczytu
+	if (config.good())
+	{
+		config >> musicVolume; //glosnosc muzyki
+		config >> fxVolume; //glosnosc efektow
+		config.close();
 	}
 }

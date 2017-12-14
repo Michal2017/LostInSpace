@@ -1,6 +1,5 @@
 #include <iostream>
 #include <string>
-#include <sstream>
 #include <fstream>
 
 #include "library.h"
@@ -11,18 +10,29 @@ int main()
 	srand(time(NULL));
 
 	std::fstream config; //obiekt wczytujacy plik konfiguracyjny
-	float musicVolume = 25.f, fxVolume = 75.f;
+	float musicVolume, fxVolume;
 	bool isFullScr = false;
 	short windowResolution = 0;
 
 	config.open("config", std::ios::in); //otworz do odczytu
 	if (config.good())
 	{
-		std::cout << "cfg loaded" << std::endl;
 		config >> musicVolume; //glosnosc muzyki
 		config >> fxVolume; //glosnosc efektow
 		config >> isFullScr; //czy aktywny jest tryb pelnoekranowy
 		config >> windowResolution; //rozmiar okna - wartosc odnosi sie do elementu tablicy resolutions
+		config.close();
+	}
+	else
+	{
+		config.open("config", std::ios::out | std::ios::trunc); //utworz nowy plik konfiguracyjny
+		config << 25;
+		config << " ";
+		config << 75;
+		config << " ";
+		config << false;
+		config << " ";
+		config << 0;
 		config.close();
 	}
 

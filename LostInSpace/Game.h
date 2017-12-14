@@ -8,6 +8,7 @@
 #include "SplashScreen.h"
 #include "MenuState.h"
 #include "OptionsMenu.h"
+#include "ApplyOptions.h"
 
 class Game //Pseudo silnik gry.
 {
@@ -27,4 +28,5 @@ private:
 	std::string windowTitle;
 	std::unique_ptr<State> activeState; //wskaznik na aktywny stan gry
 	void changeState(sn::GameState newState); //metoda zarzadzajaca zmiana stanu gry
+	void updateOptions();
 };

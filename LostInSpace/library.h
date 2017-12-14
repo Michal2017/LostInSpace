@@ -4,7 +4,7 @@
 
 namespace sn //sn - state names
 {
-	enum GameState { None, SplashScreen, MenuState, OptionsMenu, Instruction, Gameplay, GameOver, Quit };
+	enum GameState { None, SplashScreen, MenuState, OptionsMenu, ApplyOptions, Instruction, Gameplay, GameOver, Quit };
 
 	struct resolution
 	{

@@ -119,6 +119,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="ApplyOptions.cpp" />
     <ClCompile Include="Game.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="MenuButton.cpp" />
@@ -129,7 +130,9 @@
     <ClCompile Include="State.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="ApplyOptions.h" />
     <ClInclude Include="Game.h" />
+    <ClInclude Include="IButton.h" />
     <ClInclude Include="library.h" />
     <ClInclude Include="MenuButton.h" />
     <ClInclude Include="MenuState.h" />

@@ -3,21 +3,18 @@
 #include <SFML/Graphics.hpp>
 #include <string>
 
-#include "library.h"
+#include "IButton.h"
 
-class MenuButton
+class MenuButton : public IButton
 {
 public:
 	MenuButton(std::string text, sf::Font & font, int size);
 	~MenuButton();
-	void setPosition(sf::Vector2f position, bool center = false);
-	virtual void setPosition(sf::Vector2f position1, sf::Vector2f position2, bool center = false);
-	virtual void setActive();
-	virtual void setInactive();
-	virtual void update();
-	virtual void draw(sf::RenderWindow & window); //rysuje obiekt
+	virtual void setPosition(sf::Vector2f position, bool center = false) override;
+	virtual void setActive() override;
+	virtual void setInactive() override;
+	virtual sf::Text getDrawable() override { return button; } //zwraca obiekt nadajacy sie do narysowania
 private:
 	sf::Text button;
 	void centerPosition();
 };
-
