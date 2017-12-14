@@ -7,10 +7,10 @@
 #include "State.h"
 #include "MenuButton.h"
 
-class MenuState : public State
+class MenuState : public State //ekran menu
 {
 public:
-	MenuState(std::string pathToImage, sf::Font & font);
+	MenuState(std::string pathToImage, sf::Font & font, int width, int height);
 	~MenuState();
 	void loadResources();
 	void eventHandle(sf::RenderWindow & window);

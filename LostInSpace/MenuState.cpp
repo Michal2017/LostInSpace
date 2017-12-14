@@ -1,9 +1,11 @@
 #include "MenuState.h"
 
-MenuState::MenuState(std::string pathToImage, sf::Font & font)
+MenuState::MenuState(std::string pathToImage, sf::Font & font, int width, int height)
 {
 	this->pathToImage = pathToImage;
 	this->font = font;
+	this->width = width;
+	this->height = height;
 }
 
 MenuState::~MenuState()
@@ -116,7 +118,7 @@ void MenuState::draw(sf::RenderWindow & window)
 	window.draw(menuBackground);
 	for (size_t i = 0; i < buttons.size(); ++i)
 	{
-		window.draw(buttons[i].getDrawable());
+		buttons[i].draw(window);
 	}
 	window.display();
 }

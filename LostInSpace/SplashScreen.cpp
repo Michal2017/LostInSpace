@@ -22,6 +22,7 @@ void SplashScreen::loadResources()
 	square.setPosition(0.f, 0.f);
 	alpha = 254;
 	a = -1;
+
 	view.setSize(originalWidth, originalHeight);
 	view.setCenter(view.getSize().x / 2, view.getSize().y / 2);
 	view = getLetterboxView(view, width, height);

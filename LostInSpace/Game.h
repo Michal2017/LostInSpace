@@ -7,6 +7,7 @@
 
 #include "SplashScreen.h"
 #include "MenuState.h"
+#include "OptionsMenu.h"
 
 class Game //Pseudo silnik gry.
 {

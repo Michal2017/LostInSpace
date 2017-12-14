@@ -4,7 +4,7 @@
 
 #include "library.h"
 
-class State //Klasa bazowa dla wszystkich stanow gry.
+class State //Abstrakcyjna klasa bazowa dla wszystkich stanow gry.
 {
 public:
 	virtual void loadResources() = 0;
@@ -14,8 +14,8 @@ public:
 	sn::GameState changeTo() { return newState; }
 
 protected:
-	int width;
-	int height;
+	int width; //szereokosc okna
+	int height; //wysokosc okna
 	sn::GameState newState = sn::None;
 	sf::View getLetterboxView(sf::View view, int windowWidth, int windowHeight);
 };

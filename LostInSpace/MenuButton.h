@@ -10,11 +10,12 @@ class MenuButton
 public:
 	MenuButton(std::string text, sf::Font & font, int size);
 	~MenuButton();
-	virtual void setPosition(sf::Vector2f position, bool center = false);
+	void setPosition(sf::Vector2f position, bool center = false);
+	virtual void setPosition(sf::Vector2f position1, sf::Vector2f position2, bool center = false);
 	virtual void setActive();
 	virtual void setInactive();
 	virtual void update();
-	sf::Text getDrawable();
+	virtual void draw(sf::RenderWindow & window); //rysuje obiekt
 private:
 	sf::Text button;
 	void centerPosition();

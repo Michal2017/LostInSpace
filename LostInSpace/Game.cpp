@@ -38,7 +38,7 @@ void Game::run() //urochomienie gry
 
 		activeState->eventHandle(window);
 		activeState->update(deltaTime);
-		activeState->draw(window);
+		activeState->draw(window); //error dla window.setView(view)
 		changeState(activeState->changeTo());
 	}
 }
@@ -48,13 +48,15 @@ void Game::changeState(sn::GameState newState)
 	if (newState == sn::None); //brak zmiany stanu gry
 	else if (newState == sn::MenuState)
 	{
-		std::unique_ptr<MenuState> menuState(new MenuState("background/menu_background.png", font));
+		std::unique_ptr<MenuState> menuState(new MenuState("background/menu_background.png", font, width, height));
 		activeState = std::move(menuState);
 		activeState->loadResources();
 	}
 	else if (newState == sn::OptionsMenu)
 	{
-		//menu opcji
+		std::unique_ptr<OptionsMenu> optionsMenu(new OptionsMenu("background/menu_background.png", font, width, height));
+		activeState = std::move(optionsMenu);
+		activeState->loadResources();
 	}
 	else if (newState == sn::Instruction)
 	{

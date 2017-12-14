@@ -4,6 +4,7 @@ MenuButton::MenuButton(std::string text, sf::Font & font, int size)
 	: button(text, font, size)
 {
 		button.setFillColor(sf::Color::White);
+		button.setOrigin(0.0f, 0.0f);
 		button.setPosition(sf::Vector2f(0.0f, 0.0f));
 		button.setOutlineColor(sf::Color::Red);
 		button.setOutlineThickness(0.0f);
@@ -22,6 +23,10 @@ void MenuButton::setPosition(sf::Vector2f position, bool center)
 	}
 }
 
+void MenuButton::setPosition(sf::Vector2f position1, sf::Vector2f position2, bool center)
+{
+}
+
 void MenuButton::setActive()
 {
 	button.setOutlineThickness(10.0f);
@@ -36,9 +41,9 @@ void MenuButton::update()
 {
 }
 
-sf::Text MenuButton::getDrawable()
+void MenuButton::draw(sf::RenderWindow & window)
 {
-	return button;
+	window.draw(button);
 }
 
 void MenuButton::centerPosition()
