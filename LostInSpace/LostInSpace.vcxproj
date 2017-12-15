@@ -121,23 +121,36 @@
   <ItemGroup>
     <ClCompile Include="ApplyOptions.cpp" />
     <ClCompile Include="Game.cpp" />
+    <ClCompile Include="Gameplay.cpp" />
+    <ClCompile Include="Instruction.cpp" />
+    <ClCompile Include="library.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="MenuButton.cpp" />
     <ClCompile Include="MenuState.cpp" />
+    <ClCompile Include="MusicMenager.cpp" />
     <ClCompile Include="OptionsButton.cpp" />
     <ClCompile Include="OptionsMenu.cpp" />
+    <ClCompile Include="Player.cpp" />
+    <ClCompile Include="Projectile.cpp" />
+    <ClCompile Include="Score.cpp" />
     <ClCompile Include="SplashScreen.cpp" />
     <ClCompile Include="State.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="ApplyOptions.h" />
     <ClInclude Include="Game.h" />
+    <ClInclude Include="Gameplay.h" />
     <ClInclude Include="IButton.h" />
+    <ClInclude Include="Instruction.h" />
     <ClInclude Include="library.h" />
     <ClInclude Include="MenuButton.h" />
     <ClInclude Include="MenuState.h" />
+    <ClInclude Include="MusicMenager.h" />
     <ClInclude Include="OptionsButton.h" />
     <ClInclude Include="OptionsMenu.h" />
+    <ClInclude Include="Player.h" />
+    <ClInclude Include="Projectile.h" />
+    <ClInclude Include="Score.h" />
     <ClInclude Include="SplashScreen.h" />
     <ClInclude Include="State.h" />
   </ItemGroup>

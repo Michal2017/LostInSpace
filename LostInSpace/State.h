@@ -9,7 +9,7 @@ class State //Abstrakcyjna klasa bazowa dla wszystkich stanow gry.
 public:
 	virtual void loadResources() = 0;
 	virtual void eventHandle(sf::RenderWindow & window) = 0;
-	virtual void update(float deltaTime) = 0;
+	virtual void update(float deltaTime, sf::RenderWindow & window) = 0;
 	virtual void draw(sf::RenderWindow & window) = 0;
 	sn::GameState changeTo() { return newState; }
 

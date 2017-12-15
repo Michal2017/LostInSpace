@@ -1,6 +1,11 @@
 #pragma once
 
+#include <SFML/Graphics.hpp>
+#include <cmath>
+
 //zawiera globalne stale, struktury itp. 
+
+bool isColliding(sf::RectangleShape object1, sf::RectangleShape object2);
 
 namespace sn //sn - state names
 {

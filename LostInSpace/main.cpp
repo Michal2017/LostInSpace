@@ -36,7 +36,7 @@ int main()
 		config.close();
 	}
 
-	Game game(resolutions[windowResolution].x, resolutions[windowResolution].y, isFullScr, "Lost in Space");
+	Game game(resolutions[windowResolution].x, resolutions[windowResolution].y, isFullScr, "Lost in Space", fxVolume, musicVolume);
 
 	game.run();
 

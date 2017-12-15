@@ -12,7 +12,7 @@ public:
 	~ApplyOptions();
 	virtual void loadResources() override;
 	virtual void eventHandle(sf::RenderWindow & window) override;
-	virtual void update(float deltaTime) override;
+	virtual void update(float deltaTime, sf::RenderWindow & window) override;
 	virtual void draw(sf::RenderWindow & window) override;
 
 private:

@@ -37,7 +37,7 @@ void SplashScreen::eventHandle(sf::RenderWindow & window)
 	}
 }
 
-void SplashScreen::update(float deltaTime)
+void SplashScreen::update(float deltaTime, sf::RenderWindow & window)
 {
 	if (alpha >= 255) //po zakonczeniu animowania
 	{

@@ -46,7 +46,7 @@ void MenuState::eventHandle(sf::RenderWindow & window)
 	}
 }
 
-void MenuState::update(float deltaTime)
+void MenuState::update(float deltaTime, sf::RenderWindow & window)
 {
 	if (!sf::Keyboard::isKeyPressed(sf::Keyboard::Return)) //sprawdzenie czy nie jest wcisniety klawisz enter
 	{

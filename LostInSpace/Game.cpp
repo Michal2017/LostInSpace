@@ -1,18 +1,20 @@
 #include "Game.h"
 
-Game::Game(int width, int height, bool isFullScreen, std::string windowTitle)
-	: window(sf::VideoMode(width, height), windowTitle, (sf::Style::Close))
+Game::Game(int width, int height, bool isFullScreen, std::string windowTitle, int fxVolume, int musicVolume)
+	: window(sf::VideoMode(width, height), windowTitle, (sf::Style::Close)), musicMenager(musicVolume)
 {
 	this->width = width;
 	this->height = height;
 	this->isFullScreen = isFullScreen;
 	this->windowTitle = windowTitle;
-	window.setFramerateLimit(60); //maksymalna ilosc klatek na sekunde = 60
-	window.setMouseCursorVisible(false);
+	this->fxVolume = fxVolume;
+	this->musicVolume = musicVolume;
 	if (isFullScreen)
 	{
 		window.create((sf::VideoMode(width, height)), windowTitle, (sf::Style::Fullscreen)); //przelaczenie okna na tryb pelnoekranowy
 	}
+	window.setFramerateLimit(60); //maksymalna ilosc klatek na sekunde = 60
+	window.setMouseCursorVisible(false);
 }
 
 
@@ -22,6 +24,8 @@ Game::~Game()
 
 void Game::run() //urochomienie gry
 {
+	musicMenager.play(MusicMenager::trackName::MainMenu);
+
 	sf::Clock gameClock;
 	float deltaTime;
 
@@ -37,8 +41,8 @@ void Game::run() //urochomienie gry
 		deltaTime = gameClock.restart().asSeconds();
 
 		activeState->eventHandle(window);
-		activeState->update(deltaTime);
-		activeState->draw(window); //error dla window.setView(view)
+		activeState->update(deltaTime, window);
+		activeState->draw(window);
 		changeState(activeState->changeTo());
 	}
 }
@@ -66,23 +70,20 @@ void Game::changeState(sn::GameState newState)
 	}
 	else if (newState == sn::Instruction)
 	{
-		//instrukcja
+		std::unique_ptr<Instruction> instruction(new Instruction("background/instruction.png", width, height));
+		activeState = std::move(instruction);
+		activeState->loadResources();
+	}
+	else if (newState == sn::Gameplay)
+	{
+		//loading screen
+		std::unique_ptr<Gameplay> gameplay(new Gameplay(font, fxVolume, musicVolume, width, height));
+		activeState = std::move(gameplay);
+		activeState->loadResources();
+		musicMenager.play(MusicMenager::trackName::Gameplay);
 	}
 	else if (newState == sn::Quit)
 	{
 		window.close();
-	}
-}
-
-void Game::updateOptions()
-{
-	std::fstream config;
-
-	config.open("config", std::ios::in); //otworz do odczytu
-	if (config.good())
-	{
-		config >> musicVolume; //glosnosc muzyki
-		config >> fxVolume; //glosnosc efektow
-		config.close();
 	}
 }

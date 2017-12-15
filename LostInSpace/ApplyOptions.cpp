@@ -32,13 +32,18 @@ void ApplyOptions::loadResources()
 void ApplyOptions::eventHandle(sf::RenderWindow & window)
 {
 	if (*isFullScreen == true)
+	{
 		window.create(sf::VideoMode(*width, *height), "Lost in Space", (sf::Style::Fullscreen));
-	else window.create(sf::VideoMode(*width, *height), "Lost in Space", (sf::Style::Close));
+	}
+	else
+	{
+		window.create(sf::VideoMode(*width, *height), "Lost in Space", (sf::Style::Close));
+	}
 	window.setFramerateLimit(60);
 	window.setMouseCursorVisible(false);
 }
 
-void ApplyOptions::update(float deltaTime)
+void ApplyOptions::update(float deltaTime, sf::RenderWindow & window)
 {
 	newState = sn::MenuState;
 }

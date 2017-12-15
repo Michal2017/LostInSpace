@@ -47,6 +47,8 @@ void OptionsMenu::loadResources()
 	values.push_back(OptionsButton((std::to_string(resolutions[windowResolution].x) + " x " + std::to_string(resolutions[windowResolution].y)), font, oFSize));
 	buttons.push_back(MenuButton("ZATWIERDZ", font, fSize));
 	values.push_back(OptionsButton("", font, fSize));
+	buttons.push_back(MenuButton("COFNIJ", font, fSize));
+	values.push_back(OptionsButton("", font, fSize));
 
 	//konfiguracja przyciskow
 	int i = 0;
@@ -60,7 +62,11 @@ void OptionsMenu::loadResources()
 	values[i++].setPosition(sf::Vector2f(1300.f, 450.f));
 	buttons[i].setPosition(sf::Vector2f(680.f, 600.f));
 	values[i++].setPosition(sf::Vector2f(1300.f, 600.f));
-	buttons[i++].setPosition(sf::Vector2f(800.f, 850.f), true);
+	buttons[i].setPosition(sf::Vector2f(0.0f, 850.f), true);
+	values[i++].setPosition(sf::Vector2f(0.0f, 850.f));
+	buttons[i].setPosition(sf::Vector2f(0.0f, 1000.0f), true);
+	values[i++].setPosition(sf::Vector2f(0.0f, 1000.0f));
+
 }
 
 void OptionsMenu::eventHandle(sf::RenderWindow & window)
@@ -72,7 +78,7 @@ void OptionsMenu::eventHandle(sf::RenderWindow & window)
 	}
 }
 
-void OptionsMenu::update(float deltaTime)
+void OptionsMenu::update(float deltaTime, sf::RenderWindow & window)
 {
 	if (!sf::Keyboard::isKeyPressed(sf::Keyboard::Return)) //sprawdzenie czy nie jest wcisniety klawisz enter
 	{
@@ -207,23 +213,30 @@ void OptionsMenu::update(float deltaTime)
 		leftKeyIsReleased = true;
 	}
 
-	if (sf::Keyboard::isKeyPressed(sf::Keyboard::Return) && returnKeyIsReleased == true && activeButton == 4)
+	if (sf::Keyboard::isKeyPressed(sf::Keyboard::Return) && returnKeyIsReleased == true) //gdy wcisniety zostanie klawisz Enter
 	{
-		std::fstream config;
-		config.open("config", std::ios::out | std::ios::trunc);
-		if (config.good())
+		if (activeButton == (buttons.size() - 2)) //jezeli aktywny jest guzik "zatwierdz"
 		{
-			config << musicVolume;
-			config << " ";
-			config << fxVolume;
-			config << " ";
-			config << isFullScr;
-			config << " ";
-			config << windowResolution;
-			config.close();
-		}
+			std::fstream config;
+			config.open("config", std::ios::out | std::ios::trunc);
+			if (config.good())
+			{
+				config << musicVolume;
+				config << " ";
+				config << fxVolume;
+				config << " ";
+				config << isFullScr;
+				config << " ";
+				config << windowResolution;
+				config.close();
+			}
 
-		newState = sn::ApplyOptions;
+			newState = sn::ApplyOptions;
+		}
+		else if (activeButton == buttons.size() - 1) //jezeli aktywny jest guzik "cofnij"
+		{
+			newState = sn::MenuState;
+		}
 	}
 
 	for (size_t i = 0; i < buttons.size(); ++i) //wizualne uaktualnienie aktywnego przycisku

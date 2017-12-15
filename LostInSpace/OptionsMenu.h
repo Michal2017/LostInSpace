@@ -10,14 +10,14 @@
 #include "MenuButton.h"
 #include "OptionsButton.h"
 
-class OptionsMenu : public State //ekran opcji
+class OptionsMenu : public State //Ekran opcji.
 {
 public:
 	OptionsMenu(std::string pathToImage, sf::Font & font, int width, int height);
 	~OptionsMenu();
 	virtual void loadResources();
 	virtual void eventHandle(sf::RenderWindow & window);
-	virtual void update(float deltaTime);
+	virtual void update(float deltaTime, sf::RenderWindow & window);
 	virtual void draw(sf::RenderWindow & window);
 
 private:

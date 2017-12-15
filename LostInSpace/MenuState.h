@@ -14,7 +14,7 @@ public:
 	~MenuState();
 	void loadResources();
 	void eventHandle(sf::RenderWindow & window);
-	void update(float deltaTime);
+	void update(float deltaTime, sf::RenderWindow & window);
 	void draw(sf::RenderWindow & window);
 
 private:

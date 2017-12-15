@@ -1,2 +1,12 @@
-﻿  Game.cpp
+﻿  MusicMenager.cpp
+  Generowanie kodu...
+  Trwa kompilowanie...
+  main.cpp
+d:\projekty\lostinspace\lostinspace\lostinspace\main.cpp(10): warning C4244: "argument": konwersja z "time_t" do "unsigned int", możliwa utrata danych
+d:\projekty\lostinspace\lostinspace\lostinspace\main.cpp(39): warning C4244: "argument": konwersja z "float" do "int", możliwa utrata danych
+  Game.cpp
+d:\projekty\lostinspace\lostinspace\lostinspace\game.cpp(4): warning C4244: "argument": konwersja z "int" do "float", możliwa utrata danych
+d:\projekty\lostinspace\lostinspace\lostinspace\game.cpp(10): warning C4244: "=": konwersja z "int" do "float", możliwa utrata danych
+d:\projekty\lostinspace\lostinspace\lostinspace\game.cpp(11): warning C4244: "=": konwersja z "int" do "float", możliwa utrata danych
+  Generowanie kodu...
   LostInSpace.vcxproj -> D:\Projekty\LostInSpace\LostInSpace\Debug\LostInSpace.exe
