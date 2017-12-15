@@ -4,11 +4,12 @@
 
 #include "State.h"
 #include "library.h"
+#include "MusicMenager.h"
 
 class ApplyOptions : public State //Klasa aplikujaca ustawienia z pliku konfiguracyjnego.
 {
 public:
-	ApplyOptions(float & fxVolume, float & musicVolume, bool & isFullScreen, int & width, int & height);
+	ApplyOptions(float & fxVolume, float & musicVolume, bool & isFullScreen, int & width, int & height, MusicMenager & musicMenager);
 	~ApplyOptions();
 	virtual void loadResources() override;
 	virtual void eventHandle(sf::RenderWindow & window) override;
@@ -22,5 +23,6 @@ private:
 	int *width;
 	int *height;
 	short windowResolution; //odnosi sie do elementu tablicy z rozdzielczosciami resolutions
+	MusicMenager *musicMenager;
 };
 

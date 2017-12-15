@@ -64,7 +64,7 @@ void Game::changeState(sn::GameState newState)
 	}
 	else if (newState == sn::ApplyOptions)
 	{
-		std::unique_ptr<ApplyOptions> applyOptions(new ApplyOptions(fxVolume, musicVolume, isFullScreen, width, height));
+		std::unique_ptr<ApplyOptions> applyOptions(new ApplyOptions(fxVolume, musicVolume, isFullScreen, width, height, musicMenager));
 		activeState = std::move(applyOptions);
 		activeState->loadResources();
 	}
@@ -76,11 +76,16 @@ void Game::changeState(sn::GameState newState)
 	}
 	else if (newState == sn::Gameplay)
 	{
-		//loading screen
-		std::unique_ptr<Gameplay> gameplay(new Gameplay(font, fxVolume, musicVolume, width, height));
+		sf::Texture loadingT;
+		loadingT.loadFromFile("background/loading.png");
+		sf::Sprite loading;
+		loading.setTexture(loadingT);
+		window.clear(sf::Color::Black);
+		window.draw(loading);
+		window.display(); //wyswietla ekran ladowania
+		std::unique_ptr<Gameplay> gameplay(new Gameplay(font, fxVolume, musicVolume, width, height, musicMenager));
 		activeState = std::move(gameplay);
 		activeState->loadResources();
-		musicMenager.play(MusicMenager::trackName::Gameplay);
 	}
 	else if (newState == sn::Quit)
 	{

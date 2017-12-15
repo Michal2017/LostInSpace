@@ -22,4 +22,6 @@ void MusicMenager::play(trackName name)
 
 void MusicMenager::setVolume(float musicVolume)
 {
+	this->musicVolume = musicVolume;
+	track.setVolume(musicVolume);
 }

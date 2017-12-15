@@ -27,6 +27,7 @@ public:
 	int showHP() { return hp; };
 	bool didItHit(sf::RectangleShape object);
 	int showScore() { return score; }
+	void addScore() { score += 1; }
 
 private:
 	sf::RectangleShape body;

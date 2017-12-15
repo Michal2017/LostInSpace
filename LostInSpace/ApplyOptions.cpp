@@ -1,12 +1,13 @@
 #include "ApplyOptions.h"
 
-ApplyOptions::ApplyOptions(float & fxVolume, float & musicVolume, bool & isFullScreen, int & width, int & height)
+ApplyOptions::ApplyOptions(float & fxVolume, float & musicVolume, bool & isFullScreen, int & width, int & height, MusicMenager & musicMenager)
 {
 	this->fxVolume = &fxVolume;
 	this->musicVolume = &musicVolume;
 	this->isFullScreen = &isFullScreen;
 	this->width = &width;
 	this->height = &height;
+	this->musicMenager = &musicMenager;
 }
 
 ApplyOptions::~ApplyOptions()
@@ -27,6 +28,7 @@ void ApplyOptions::loadResources()
 	}
 	*width = resolutions[windowResolution].x;
 	*height = resolutions[windowResolution].y;
+	musicMenager->setVolume(*musicVolume);
 }
 
 void ApplyOptions::eventHandle(sf::RenderWindow & window)

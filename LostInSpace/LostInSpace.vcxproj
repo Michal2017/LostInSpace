@@ -119,12 +119,17 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="Animation.cpp" />
     <ClCompile Include="ApplyOptions.cpp" />
+    <ClCompile Include="Astronaut.cpp" />
     <ClCompile Include="Game.cpp" />
     <ClCompile Include="Gameplay.cpp" />
+    <ClCompile Include="HPBar.cpp" />
     <ClCompile Include="Instruction.cpp" />
+    <ClCompile Include="Invader.cpp" />
     <ClCompile Include="library.cpp" />
     <ClCompile Include="main.cpp" />
+    <ClCompile Include="MedKit.cpp" />
     <ClCompile Include="MenuButton.cpp" />
     <ClCompile Include="MenuState.cpp" />
     <ClCompile Include="MusicMenager.cpp" />
@@ -135,14 +140,22 @@
     <ClCompile Include="Score.cpp" />
     <ClCompile Include="SplashScreen.cpp" />
     <ClCompile Include="State.cpp" />
+    <ClCompile Include="Striker.cpp" />
+    <ClCompile Include="Tracker.cpp" />
+    <ClCompile Include="Warning.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="Animation.h" />
     <ClInclude Include="ApplyOptions.h" />
+    <ClInclude Include="Astronaut.h" />
     <ClInclude Include="Game.h" />
     <ClInclude Include="Gameplay.h" />
+    <ClInclude Include="HPBar.h" />
     <ClInclude Include="IButton.h" />
     <ClInclude Include="Instruction.h" />
+    <ClInclude Include="Invader.h" />
     <ClInclude Include="library.h" />
+    <ClInclude Include="MedKit.h" />
     <ClInclude Include="MenuButton.h" />
     <ClInclude Include="MenuState.h" />
     <ClInclude Include="MusicMenager.h" />
@@ -153,6 +166,9 @@
     <ClInclude Include="Score.h" />
     <ClInclude Include="SplashScreen.h" />
     <ClInclude Include="State.h" />
+    <ClInclude Include="Striker.h" />
+    <ClInclude Include="Tracker.h" />
+    <ClInclude Include="Warning.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
