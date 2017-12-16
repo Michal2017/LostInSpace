@@ -1,7 +1,7 @@
 #pragma once
 
 #include <SFML/Graphics.hpp>
-//#include <SFML/Audio.hpp>
+#include <SFML/Audio.hpp>
 #include <cmath>
 #include <iostream>
 #include <vector>
@@ -18,7 +18,7 @@ public:
 	sf::RectangleShape getBody() { return body; }
 	sf::Vector2f getPosition() { return body.getPosition(); }
 	sf::Vector2f getMovement() { return movement; }
-	void update(float deltaTime, sf::RenderWindow & window, sf::Texture *projectileTexture/*, sf::Sound *bulletFired*/);
+	void update(float deltaTime, sf::RenderWindow & window, sf::Texture *projectileTexture, sf::Sound *bulletFired);
 	void draw(sf::RenderWindow & window);
 	bool canISeeit(sf::RectangleShape object);
 	bool canISeeit(sf::Sprite object);

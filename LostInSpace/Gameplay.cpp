@@ -1,7 +1,7 @@
 #include "Gameplay.h"
 
 Gameplay::Gameplay(sf::Font & font, float fxVolume, float musicVolume, int width, int height, MusicMenager & musicMenager)
-	: score(font), outOfArea(originalWidth, font, 400, "OUT OF AREA", 50)
+	: score(font), outOfArea(originalWidth, font, 400, "POZA OBSZAREM", 50)
 {
 	this->musicMenager = &musicMenager;
 	this->font = font;
@@ -141,10 +141,138 @@ void Gameplay::update(float deltaTime, sf::RenderWindow & window)
 		window.setView(mouseView);
 		myMouse.setPosition((float)sf::Mouse::getPosition(window).x, (float)sf::Mouse::getPosition(window).y); //uaktualnienie kursora
 
-		window.setView(view);
-		player.update(deltaTime, window, &greenProjectileTexture);
+		astronaut.update(deltaTime);
+
+		window.setView(view); //view jest potrzebne, aby poprawnie obracac statkiem w kiedunku kursora
+		player.update(deltaTime, window, &greenProjectileTexture, &bulletFired);
+
+		if (isColliding(player.getBody(), astronaut.getBody()) && astronautCollected.getStatus() == sf::Sound::Stopped) //sprawdzenie czy statek uratowal astronaute
+		{
+			int numberOfStrikers = 3;
+			astronautCollected.play();
+			player.addScore();
+			score.update(player.showScore());
+			numberOfStrikers += (int)(player.showScore() / 5);
+			astronaut.relocate();
+			for (int i = 0; i < numberOfStrikers; ++i) //utworzenie nowych obiektow typu "striker"
+			{
+				float a = player.getPosition().x, b = player.getPosition().y, r = 970.f, y;
+				int ai = a;
+				float x = rand() % 1920 + (ai - 970);
+				if (i % 2 == 0)
+					y = (2.f * b - sqrtf(4.f * r * r - (4.f * (x - a) * (x - a)))) / 2.f;
+				else y = (2.f * b + sqrtf(4.f * r * r - (4.f * (x - a) * (x - a)))) / 2.f;
+				strikers.push_back(Striker(&strikerTexture, sf::Vector2f(x, y)));
+				x = rand() % 10001;
+				y = rand() % 10001;
+				medKits.push_back(MedKit(&medKitTexture, sf::Vector2f(x, y)));
+			}
+		}
+
+		for (unsigned int i = 0; i < strikers.size(); ++i) //sprawdzanie kolizji pomiedzy statkiem gracza, a przeciwnikami typu "striker"
+		{
+			strikers[i].update(player.getPosition(), deltaTime);
+			if (isColliding(strikers[i].getBody(), player.getBody()))
+			{
+				damageTaken.play();
+				player.gotDamaged(strikers[i].dealDamage());
+				hpbar.update(player.showHP());
+				strikers.erase(strikers.begin() + i);
+				--i;
+			}
+		}
+		for (unsigned int i = 0; i < strikers.size(); ++i) //sprawdzanie czy gracz trafia pociskami przeciwnikow typu "striker"
+		{
+			if (player.didItHit(strikers[i].getBody()))
+			{
+				strikers[i].gotDamaged();
+				if (strikers[i].showHp() <= 0)
+				{
+					explosionSounds.push_back(sf::Sound(exploded));
+					explosionSounds.back().play();
+					explosions.push_back(Animation(&explosionTexture, 0.001f, 8, 8, strikers[i].getBody().getPosition()));
+					strikers.erase(strikers.begin() + i);
+					--i;
+				}
+			}
+		}
+
+		invaderSpawnTime += deltaTime; //aktualizowanie czasu, po ktorym maja sie pojawiac przeciwnicy typu "invader"
+		if (invaderSpawnTime >= 15.f) //tworzenie nowego obiektu typu "invader" co 15sekund
+		{
+			invaderSpawn.play();
+			invaderSpawnTime = 0.f;
+			float a = player.getPosition().x, b = player.getPosition().y, r = 970.f, y;
+			int ai = a;
+			float x = rand() % 1920 + (ai - 970);
+			y = (2.f * b - sqrtf(4.f * r * r - (4.f * (x - a) * (x - a)))) / 2.f; //losowa pozycja na osi XY na okregu wokol statku gracza
+			invaders.push_back(Invader(&invaderTexture, sf::Vector2f(x, y), spaceGun));
+		}
+		for (unsigned i = 0; i < invaders.size(); ++i) //aktualizowanie wszystkich przeciwnikow typu "invader"
+		{
+			invaders[i].update(deltaTime, player.getPosition(), &redProjectileTexture);
+		}
+		for (unsigned i = 0; i < invaders.size(); ++i) //sprawdzanie czy gracz trafia pociskami obiekty typu "invader"
+		{
+			if (player.didItHit(invaders[i].getBody()))
+			{
+				invaders[i].gotDamaged();
+				if (invaders[i].showHP() <= 0)
+				{
+					explosionSounds.push_back(sf::Sound(exploded));
+					explosionSounds.back().play();
+					explosions.push_back(Animation(&explosionTexture, 0.001f, 8, 8, invaders[i].getBody().getPosition()));
+					invaders.erase(invaders.begin() + i);
+					--i;
+				}
+			}
+		}
+		for (unsigned i = 0; i < invaders.size(); ++i) //sprawdzanie czy przeciwnicy typu "invader" trafiaja pociskami gracza
+		{
+			if (invaders[i].didItHit(player.getBody()))
+			{
+				player.gotDamaged(invaders[i].dealDamage());
+				hpbar.update(player.showHP());
+			}
+		}
+
+		for (unsigned int i = 0; i < medKits.size(); ++i) //sprawdzenie czy gracz zebral apteczke
+		{
+			if (isColliding(player.getBody(), medKits[i].getBody()))
+			{
+				if (player.gotHealed(medKits[i].getPower()))
+				{
+					medKitTaken.play();
+					hpbar.update(player.showHP());
+					explosions.push_back(Animation(&fogTexture, 0.05f, 3, 5, medKits[i].getBody().getPosition()));
+					medKits.erase(medKits.begin() + i);
+					--i;
+					continue;
+				}
+			}
+			medKits[i].update(deltaTime);
+		}
+
+		outOfArea.update(deltaTime, player.getPosition(), sf::Vector2f(10000.f, 10000.f));
+
+		hpbar.animate(deltaTime);
 
 		tracker.update(player.getBody(), astronaut.getBody());
+
+		for (unsigned int i = 0; i < explosions.size(); ++i) //aktualizowanie i usuwanie animacji wybuchow
+		{
+			if (explosions[i].update(deltaTime))
+				explosions.erase(explosions.begin() + i);
+		}
+
+		if (explosionSounds.size() >= 1 && explosionSounds.front().getStatus() == sf::Sound::Stopped) //usuwanie z pamieci dzwiekow wybuchow
+			explosionSounds.erase(explosionSounds.begin());
+
+		if (player.showHP() == 0) //jezeli gracz stracil wszystkie punkty zdrowia
+		{
+			newState = sn::MenuState;
+			musicMenager->play(MusicMenager::trackName::MainMenu);
+		}
 
 		view.setCenter(player.getPosition()); //ustawienie kamery na statku gracza
 	}

@@ -35,7 +35,7 @@ Player::~Player()
 {
 }
 
-void Player::update(float deltaTime, sf::RenderWindow & window, sf::Texture *projectileTexture/*, sf::Sound *bulletFired*/)
+void Player::update(float deltaTime, sf::RenderWindow & window, sf::Texture *projectileTexture, sf::Sound *bulletFired)
 {
 	float length;
 	float maxVelocity = 10.0f;
@@ -105,7 +105,7 @@ void Player::update(float deltaTime, sf::RenderWindow & window, sf::Texture *pro
 		direction.x = (mousePosition.x - body.getPosition().x) / length2;
 		direction.y = (mousePosition.y - body.getPosition().y) / length2;
 		bullets.push_back(Projectile(projectileTexture, rotationAngle - 90.f, body.getPosition(), direction, 1500.f, 1));
-		//bulletFired->play();
+		bulletFired->play();
 	}
 
 	for (unsigned int i = 0; i < bullets.size(); ++i)

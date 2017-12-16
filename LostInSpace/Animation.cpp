@@ -1,6 +1,6 @@
 #include "Animation.h"
 
-Animation::Animation(sf::Texture * texture, float time, int rows, int columns, sf::Vector2f position)
+Animation::Animation(sf::Texture * texture, float time, int rows, int columns, sf::Vector2f position) //time - czas potrzebny do zmiany klatki
 {
 	this->time = time;
 	this->rows = rows - 1;
