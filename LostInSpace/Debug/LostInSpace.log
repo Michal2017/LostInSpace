@@ -1,15 +1,4 @@
-﻿  Gameplay.cpp
-d:\projekty\lostinspace\lostinspace\lostinspace\gameplay.cpp(21): warning C4244: "argument": konwersja z "const int" do "float", możliwa utrata danych
-d:\projekty\lostinspace\lostinspace\lostinspace\gameplay.cpp(23): warning C4244: "argument": konwersja z "const int" do "float", możliwa utrata danych
-d:\projekty\lostinspace\lostinspace\lostinspace\gameplay.cpp(26): warning C4244: "argument": konwersja z "int" do "float", możliwa utrata danych
-d:\projekty\lostinspace\lostinspace\lostinspace\gameplay.cpp(111): warning C4244: "inicjowanie": konwersja z "int" do "float", możliwa utrata danych
-d:\projekty\lostinspace\lostinspace\lostinspace\gameplay.cpp(112): warning C4244: "inicjowanie": konwersja z "int" do "float", możliwa utrata danych
-d:\projekty\lostinspace\lostinspace\lostinspace\gameplay.cpp(160): warning C4244: "inicjowanie": konwersja z "float" do "int", możliwa utrata danych
-d:\projekty\lostinspace\lostinspace\lostinspace\gameplay.cpp(161): warning C4244: "inicjowanie": konwersja z "int" do "float", możliwa utrata danych
-d:\projekty\lostinspace\lostinspace\lostinspace\gameplay.cpp(166): warning C4244: "=": konwersja z "int" do "float", możliwa utrata danych
-d:\projekty\lostinspace\lostinspace\lostinspace\gameplay.cpp(167): warning C4244: "=": konwersja z "int" do "float", możliwa utrata danych
-d:\projekty\lostinspace\lostinspace\lostinspace\gameplay.cpp(206): warning C4244: "inicjowanie": konwersja z "float" do "int", możliwa utrata danych
-d:\projekty\lostinspace\lostinspace\lostinspace\gameplay.cpp(207): warning C4244: "inicjowanie": konwersja z "int" do "float", możliwa utrata danych
-  Animation.cpp
-  Generowanie kodu...
+﻿  main.cpp
+d:\projekty\lostinspace\lostinspace\lostinspace\main.cpp(10): warning C4244: "argument": konwersja z "time_t" do "unsigned int", możliwa utrata danych
+d:\projekty\lostinspace\lostinspace\lostinspace\main.cpp(39): warning C4244: "argument": konwersja z "float" do "int", możliwa utrata danych
   LostInSpace.vcxproj -> D:\Projekty\LostInSpace\LostInSpace\Debug\LostInSpace.exe

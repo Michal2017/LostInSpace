@@ -10,7 +10,7 @@ int main()
 	srand(time(NULL));
 
 	std::fstream config; //obiekt wczytujacy plik konfiguracyjny
-	float musicVolume, fxVolume;
+	float musicVolume = 25, fxVolume = 75;
 	bool isFullScr = false;
 	short windowResolution = 0;
 

@@ -21,4 +21,5 @@ private:
 	sf::Sprite image;
 	sf::View view;
 	std::string pathToImage;
+	bool isReturnKeyReleased = false;
 };

@@ -35,7 +35,12 @@ void Instruction::eventHandle(sf::RenderWindow & window)
 
 void Instruction::update(float deltaTime, sf::RenderWindow & window)
 {
-	if (sf::Keyboard::isKeyPressed(sf::Keyboard::Return) || sf::Keyboard::isKeyPressed(sf::Keyboard::Space))
+	if (!sf::Keyboard::isKeyPressed(sf::Keyboard::Return))
+	{
+		isReturnKeyReleased = true;
+	}
+
+	if ((sf::Keyboard::isKeyPressed(sf::Keyboard::Return) || sf::Keyboard::isKeyPressed(sf::Keyboard::Space)) && isReturnKeyReleased)
 	{
 		newState = sn::Gameplay;
 	}
