@@ -13,6 +13,7 @@
 #include "ApplyOptions.h"
 #include "Instruction.h"
 #include "Gameplay.h"
+#include "GameOver.h"
 
 class Game //Pseudo silnik gry.
 {

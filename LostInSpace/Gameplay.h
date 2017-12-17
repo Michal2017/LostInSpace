@@ -3,6 +3,7 @@
 #include <SFML/Graphics.hpp>
 #include <SFML/Audio.hpp>
 #include <string>
+#include <fstream>
 #include <cmath>
 #include <cstdlib>
 #include <vector>
@@ -20,6 +21,7 @@
 #include "Warning.h"
 #include "Striker.h"
 #include "Invader.h"
+#include "MenuButton.h"
 
 class Gameplay : public State
 {
@@ -32,7 +34,7 @@ public:
 	virtual void draw(sf::RenderWindow & window) override;
 
 private:
-	void backToMenu();
+	void saveScore();
 	static const int numberOfMeteors = 300; //liczba meteorow
 	sf::Event event;
 	sf::Font font;
@@ -88,11 +90,13 @@ private:
 	Tracker tracker;
 	Warning outOfArea;
 	HPBar hpbar;
+	MenuButton pause;
 	float fxVolume;
 	float musicVolume;
 	float invaderSpawnTime = 0.0f;
 	int width;
 	int height;
 	bool isPaused = false;
+	bool pKeyIsReleased = true;
 };
 

@@ -123,6 +123,7 @@
     <ClCompile Include="ApplyOptions.cpp" />
     <ClCompile Include="Astronaut.cpp" />
     <ClCompile Include="Game.cpp" />
+    <ClCompile Include="GameOver.cpp" />
     <ClCompile Include="Gameplay.cpp" />
     <ClCompile Include="HPBar.cpp" />
     <ClCompile Include="Instruction.cpp" />
@@ -149,6 +150,7 @@
     <ClInclude Include="ApplyOptions.h" />
     <ClInclude Include="Astronaut.h" />
     <ClInclude Include="Game.h" />
+    <ClInclude Include="GameOver.h" />
     <ClInclude Include="Gameplay.h" />
     <ClInclude Include="HPBar.h" />
     <ClInclude Include="IButton.h" />

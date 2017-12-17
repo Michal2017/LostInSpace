@@ -52,7 +52,7 @@ void Game::changeState(sn::GameState newState)
 	if (newState == sn::None); //brak zmiany stanu gry
 	else if (newState == sn::MenuState)
 	{
-		std::unique_ptr<MenuState> menuState(new MenuState("background/menu_background.png", font, width, height));
+		std::unique_ptr<MenuState> menuState(new MenuState("background/menu_background.png", font, width, height, fxVolume));
 		activeState = std::move(menuState);
 		activeState->loadResources();
 	}
@@ -85,6 +85,12 @@ void Game::changeState(sn::GameState newState)
 		window.display(); //wyswietla ekran ladowania
 		std::unique_ptr<Gameplay> gameplay(new Gameplay(font, fxVolume, musicVolume, width, height, musicMenager));
 		activeState = std::move(gameplay);
+		activeState->loadResources();
+	}
+	else if (newState == sn::GameOver)
+	{
+		std::unique_ptr<GameOver> gameOver(new GameOver("background/game_background.png", font, width, height));
+		activeState = std::move(gameOver);
 		activeState->loadResources();
 	}
 	else if (newState == sn::Quit)

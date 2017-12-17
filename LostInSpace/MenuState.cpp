@@ -1,11 +1,12 @@
 #include "MenuState.h"
 
-MenuState::MenuState(std::string pathToImage, sf::Font & font, int width, int height)
+MenuState::MenuState(std::string pathToImage, sf::Font & font, int width, int height, float fxVolume)
 {
 	this->pathToImage = pathToImage;
 	this->font = font;
 	this->width = width;
 	this->height = height;
+	this->fxVolume = fxVolume;
 }
 
 MenuState::~MenuState()
@@ -35,6 +36,10 @@ void MenuState::loadResources()
 	buttons[i++].setPosition(sf::Vector2f(0.0f, 350.0f), true);
 	buttons[i++].setPosition(sf::Vector2f(0.0f, 500.0f), true);
 	buttons[i++].setPosition(sf::Vector2f(0.0f, 650.0f), true);
+
+	buttonSwitchSoundB.loadFromFile("music/menuSound.wav");
+	buttonSwitchSound.setBuffer(buttonSwitchSoundB);
+	buttonSwitchSound.setVolume(fxVolume);
 }
 
 void MenuState::eventHandle(sf::RenderWindow & window)
@@ -55,6 +60,7 @@ void MenuState::update(float deltaTime, sf::RenderWindow & window)
 
 	if ((sf::Keyboard::isKeyPressed(sf::Keyboard::Down) || sf::Keyboard::isKeyPressed(sf::Keyboard::S)) && downKeyIsReleased == 1) //wczytanie wejscia z klawiatury (ze strzalek lub W / S)
 	{
+		buttonSwitchSound.play();
 		activeButton += 1;
 		downKeyIsReleased = false;
 	}
@@ -65,6 +71,7 @@ void MenuState::update(float deltaTime, sf::RenderWindow & window)
 	
 	if ((sf::Keyboard::isKeyPressed(sf::Keyboard::Up) || sf::Keyboard::isKeyPressed(sf::Keyboard::W)) && upKeyIsReleased == 1)
 	{
+		buttonSwitchSound.play();
 		activeButton -= 1;
 		upKeyIsReleased = false;
 	}
@@ -98,7 +105,7 @@ void MenuState::update(float deltaTime, sf::RenderWindow & window)
 		}
 	}
 
-	for (size_t i = 0; i < buttons.size(); ++i) //wizualne uaktualnienie aktywnego przycisku
+	for (unsigned int i = 0; i < buttons.size(); ++i) //wizualne uaktualnienie aktywnego przycisku
 	{
 		if (i == activeButton)
 		{
@@ -116,7 +123,7 @@ void MenuState::draw(sf::RenderWindow & window)
 	window.clear(sf::Color::Black);
 	window.setView(view);
 	window.draw(menuBackground);
-	for (size_t i = 0; i < buttons.size(); ++i)
+	for (unsigned int i = 0; i < buttons.size(); ++i)
 	{
 		window.draw(buttons[i].getDrawable());
 	}

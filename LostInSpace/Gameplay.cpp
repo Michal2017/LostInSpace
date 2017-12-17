@@ -1,7 +1,7 @@
 #include "Gameplay.h"
 
 Gameplay::Gameplay(sf::Font & font, float fxVolume, float musicVolume, int width, int height, MusicMenager & musicMenager)
-	: score(font), outOfArea(originalWidth, font, 400, "POZA OBSZAREM", 50)
+	: score(font), outOfArea(originalWidth, font, 400, "POZA OBSZAREM", 50), pause("PAUZA", font, 100)
 {
 	this->musicMenager = &musicMenager;
 	this->font = font;
@@ -112,6 +112,8 @@ void Gameplay::loadResources()
 		float y = rand() % 10001;
 		medKits.push_back(MedKit(&medKitTexture, sf::Vector2f(x, y)));
 	}
+	pause.setActive();
+	pause.setPosition(sf::Vector2f(0.0f, 550.0f), true);
 	/********************************************/
 
 	musicMenager->play(MusicMenager::trackName::Gameplay); //muzyka
@@ -132,12 +134,20 @@ void Gameplay::update(float deltaTime, sf::RenderWindow & window)
 	{
 		if (sf::Keyboard::isKeyPressed(sf::Keyboard::Escape)) //wyjscie z gry po nacisnieciu Esc
 		{
-			backToMenu();
+			musicMenager->play(MusicMenager::trackName::MainMenu);
+			saveScore();
+			newState = sn::GameOver;
 		}
-		if (sf::Keyboard::isKeyPressed(sf::Keyboard::P)) //koniec pauzy
+		if (!sf::Keyboard::isKeyPressed(sf::Keyboard::P))
+		{
+			pKeyIsReleased = true;
+		}
+		if (sf::Keyboard::isKeyPressed(sf::Keyboard::P) && pKeyIsReleased) //pauza
 		{
 			isPaused = true;
+			pKeyIsReleased = false;
 		}
+
 		window.setView(mouseView);
 		myMouse.setPosition((float)sf::Mouse::getPosition(window).x, (float)sf::Mouse::getPosition(window).y); //uaktualnienie kursora
 
@@ -270,7 +280,8 @@ void Gameplay::update(float deltaTime, sf::RenderWindow & window)
 
 		if (player.showHP() == 0) //jezeli gracz stracil wszystkie punkty zdrowia
 		{
-			newState = sn::MenuState;
+			newState = sn::GameOver;
+			saveScore();
 			musicMenager->play(MusicMenager::trackName::MainMenu);
 		}
 
@@ -280,11 +291,18 @@ void Gameplay::update(float deltaTime, sf::RenderWindow & window)
 	{
 		if (sf::Keyboard::isKeyPressed(sf::Keyboard::Escape)) //wyjscie z gry po nacisnieciu Esc
 		{
-			backToMenu();
+			musicMenager->play(MusicMenager::trackName::MainMenu);
+			saveScore();
+			newState = sn::GameOver;
 		}
-		if (sf::Keyboard::isKeyPressed(sf::Keyboard::P)) //koniec pauzy
+		if (!sf::Keyboard::isKeyPressed(sf::Keyboard::P))
+		{
+			pKeyIsReleased = true;
+		}
+		if (sf::Keyboard::isKeyPressed(sf::Keyboard::P) && pKeyIsReleased) //koniec pauzy
 		{
 			isPaused = false;
+			pKeyIsReleased = false;
 		}
 
 		window.setView(mouseView);
@@ -332,12 +350,41 @@ void Gameplay::draw(sf::RenderWindow & window)
 	window.draw(score.getDrawable());
 	window.draw(tracker.getBody());
 	hpbar.drawBar(window);
+	if (isPaused)
+	{
+		window.draw(pause.getDrawable());
+	}
 
 	window.display();
 }
 
-void Gameplay::backToMenu()
+void Gameplay::saveScore()
 {
-	musicMenager->play(MusicMenager::trackName::MainMenu);
-	newState = sn::MenuState;
+	int highestScore;
+	std::fstream scoreFile;
+
+	scoreFile.open("highScore", std::ios::in);
+	if (scoreFile.good())
+	{
+		scoreFile >> highestScore;
+		scoreFile.close();
+	}
+	else
+	{
+		highestScore = 0;
+	}
+
+	if (player.showScore() > highestScore)
+	{
+		highestScore = player.showScore();
+	}
+
+	scoreFile.open("highScore", std::ios::out, std::ios::trunc);
+	if (scoreFile.good())
+	{
+		scoreFile << highestScore;
+		scoreFile << " ";
+		scoreFile << player.showScore();
+		scoreFile.close();
+	}
 }

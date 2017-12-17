@@ -1,6 +1,7 @@
 #pragma once
 
 #include <SFML/Graphics.hpp>
+#include <SFML/Audio.hpp>
 #include <string>
 #include <vector>
 #include <memory>
@@ -27,6 +28,8 @@ private:
 	sf::Sprite menuBackground;
 	sf::View view;
 	sf::Font font;
+	sf::SoundBuffer buttonSwitchSoundB;
+	sf::Sound buttonSwitchSound;
 	std::string pathToImage;
 	std::vector<MenuButton> buttons; //tablica z przyciskami
 	std::vector<OptionsButton> values; //tablica z wartosciami konfiguracji

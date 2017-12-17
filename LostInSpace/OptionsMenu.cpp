@@ -67,6 +67,9 @@ void OptionsMenu::loadResources()
 	buttons[i].setPosition(sf::Vector2f(0.0f, 1000.0f), true);
 	values[i++].setPosition(sf::Vector2f(0.0f, 1000.0f));
 
+	buttonSwitchSoundB.loadFromFile("music/menuSound.wav");
+	buttonSwitchSound.setBuffer(buttonSwitchSoundB);
+	buttonSwitchSound.setVolume(fxVolume);
 }
 
 void OptionsMenu::eventHandle(sf::RenderWindow & window)
@@ -87,6 +90,7 @@ void OptionsMenu::update(float deltaTime, sf::RenderWindow & window)
 
 	if ((sf::Keyboard::isKeyPressed(sf::Keyboard::Down) || sf::Keyboard::isKeyPressed(sf::Keyboard::S)) && downKeyIsReleased == 1) //wczytanie wejscia z klawiatury (ze strzalek lub W / S)
 	{
+		buttonSwitchSound.play();
 		activeButton += 1;
 		downKeyIsReleased = false;
 	}
@@ -97,6 +101,7 @@ void OptionsMenu::update(float deltaTime, sf::RenderWindow & window)
 
 	if ((sf::Keyboard::isKeyPressed(sf::Keyboard::Up) || sf::Keyboard::isKeyPressed(sf::Keyboard::W)) && upKeyIsReleased == 1)
 	{
+		buttonSwitchSound.play();
 		activeButton -= 1;
 		upKeyIsReleased = false;
 	}
@@ -120,6 +125,7 @@ void OptionsMenu::update(float deltaTime, sf::RenderWindow & window)
 		leftKeyIsReleased = false;
 		if (activeButton == i++)
 		{
+			buttonSwitchSound.play();
 			fxVolume -= 5.f;
 			if (fxVolume < 0.f)
 			{
@@ -129,6 +135,7 @@ void OptionsMenu::update(float deltaTime, sf::RenderWindow & window)
 		}
 		else if (activeButton == i++)
 		{
+			buttonSwitchSound.play();
 			musicVolume -= 5.f;
 			if (musicVolume < 0.f)
 			{
@@ -138,6 +145,7 @@ void OptionsMenu::update(float deltaTime, sf::RenderWindow & window)
 		}
 		else if (activeButton == i++)
 		{
+			buttonSwitchSound.play();
 			if (isFullScr == true)
 			{
 				isFullScr = false;
@@ -150,6 +158,7 @@ void OptionsMenu::update(float deltaTime, sf::RenderWindow & window)
 		}
 		else if (activeButton == i++)
 		{
+			buttonSwitchSound.play();
 			windowResolution -= 1;
 			if (windowResolution < 0)
 			{
@@ -164,6 +173,7 @@ void OptionsMenu::update(float deltaTime, sf::RenderWindow & window)
 		rightKeyIsReleased = false;
 		if (activeButton == i++)
 		{
+			buttonSwitchSound.play();
 			fxVolume += 5.f;
 			if (fxVolume > 100.f)
 			{
@@ -173,6 +183,7 @@ void OptionsMenu::update(float deltaTime, sf::RenderWindow & window)
 		}
 		else if (activeButton == i++)
 		{
+			buttonSwitchSound.play();
 			musicVolume += 5.f;
 			if (musicVolume > 100.f)
 			{
@@ -182,6 +193,7 @@ void OptionsMenu::update(float deltaTime, sf::RenderWindow & window)
 		}
 		else if (activeButton == i++)
 		{
+			buttonSwitchSound.play();
 			if (isFullScr == true)
 			{
 				isFullScr = false;
@@ -194,6 +206,7 @@ void OptionsMenu::update(float deltaTime, sf::RenderWindow & window)
 		}
 		else if (activeButton == i++)
 		{
+			buttonSwitchSound.play();
 			windowResolution += 1;
 			if (windowResolution > 13)
 			{
@@ -239,7 +252,7 @@ void OptionsMenu::update(float deltaTime, sf::RenderWindow & window)
 		}
 	}
 
-	for (size_t i = 0; i < buttons.size(); ++i) //wizualne uaktualnienie aktywnego przycisku
+	for (unsigned int i = 0; i < buttons.size(); ++i) //wizualne uaktualnienie aktywnego przycisku
 	{
 		if (i == activeButton)
 		{
@@ -260,7 +273,7 @@ void OptionsMenu::draw(sf::RenderWindow & window)
 	window.setView(view);
 	window.draw(menuBackground);
 
-	for (size_t i = 0; i < buttons.size(); ++i)
+	for (unsigned int i = 0; i < buttons.size(); ++i)
 	{
 		window.draw(buttons[i].getDrawable());
 		window.draw(values[i].getDrawable());
