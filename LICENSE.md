@@ -18,11 +18,11 @@ Smoke animation:
 
 	Langax - Adrenaline Intro
 	http://freemusicarchive.org/music/Langax/
-  license: Attribution-NonCommercial-ShareAlike 4.0 International (CC BY-NC-SA 4.0)
+  	license: Attribution-NonCommercial-ShareAlike 4.0 International (CC BY-NC-SA 4.0)
 
-  Parvus Decree - Drifting in the Stellar Wind (Ethereal Mix)
-  http://freemusicarchive.org/music/Parvus_Decree/
-  license: Attribution-NonCommercial-ShareAlike 4.0 International (CC BY-NC-SA 4.0)
+  	Parvus Decree - Drifting in the Stellar Wind (Ethereal Mix)
+  	http://freemusicarchive.org/music/Parvus_Decree/
+  	license: Attribution-NonCommercial-ShareAlike 4.0 International (CC BY-NC-SA 4.0)
 
 
 # Font:
