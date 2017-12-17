@@ -1,4 +1,4 @@
-#Textures:
+# Textures:
 
 Backgrounds:
   https://opengameart.org/content/space-backgrounds-8 (free)
@@ -14,18 +14,18 @@ Smoke animation:
 	https://opengameart.org/content/smoke-aura (public domain)
 
 
-#Music:
+# Music:
 
 	Langax - Adrenaline Intro
 	http://freemusicarchive.org/music/Langax/
-	license: Attribution-NonCommercial-ShareAlike 4.0 International (CC BY-NC-SA 4.0)
+  license: Attribution-NonCommercial-ShareAlike 4.0 International (CC BY-NC-SA 4.0)
 
   Parvus Decree - Drifting in the Stellar Wind (Ethereal Mix)
   http://freemusicarchive.org/music/Parvus_Decree/
   license: Attribution-NonCommercial-ShareAlike 4.0 International (CC BY-NC-SA 4.0)
 
 
-#Font:
+# Font:
 
   Spartaco
   www.iconian.com/commercial.html (free for non commercial usage)
